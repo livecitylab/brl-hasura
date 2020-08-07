@@ -1,0 +1,26 @@
+- table:
+    schema: public
+    name: districts_berlin
+  array_relationships:
+  - name: rentals
+    using:
+      foreign_key_constraint_on:
+        column: district_id
+        table:
+          schema: public
+          name: rental
+- table:
+    schema: public
+    name: rental
+  object_relationships:
+  - name: districts_berlin
+    using:
+      foreign_key_constraint_on: district_id
+  computed_fields:
+  - name: district
+    definition:
+      function:
+        schema: public
+        name: district_name
+      table_argument: null
+    comment: ""
